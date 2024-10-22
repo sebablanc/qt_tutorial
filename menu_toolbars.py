@@ -4,13 +4,14 @@ from PyQt6.QtWidgets import (
     QLabel, QToolBar, QStatusBar,
     QCheckBox
 )
-from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtGui import QAction, QIcon, QKeySequence
 from PyQt6.QtCore import Qt, QSize
 
-class MainWindowToolbar(QMainWindow):
+# Ejemplo Toolbar y Menu
+class MainWindow(QMainWindow):
 
     def __init__(self):
-        super(MainWindowToolbar, self).__init__()
+        super(MainWindow, self).__init__()
 
         self.setWindowTitle("Toolbar App")
 
@@ -28,6 +29,7 @@ class MainWindowToolbar(QMainWindow):
         button_action.setStatusTip("Este es tu botón")
         button_action.triggered.connect(self.onMyToolbarButtonClick)
         button_action.setCheckable(True)
+        button_action.setShortcut(QKeySequence("Ctrl+p"))
         toolbar.addAction(button_action)
 
         toolbar.addSeparator()
@@ -43,11 +45,23 @@ class MainWindowToolbar(QMainWindow):
 
         self.setStatusBar(QStatusBar(self))
 
+        # Creando el menu
+        menu = self.menuBar()
+
+        # Creando opcion File
+        file_menu = menu.addMenu("&File")
+        file_menu.addAction(button_action)
+        file_menu.addSeparator()
+
+        # Creando submenu
+        file_submenu = file_menu.addMenu("Submenu")
+        file_submenu.addAction(button_action2)
+
     def onMyToolbarButtonClick(self, s):
         print("Click", s)
 
 
 app = QApplication(sys.argv)
-w = MainWindowToolbar()
+w = MainWindow()
 w.show()
 app.exec()
