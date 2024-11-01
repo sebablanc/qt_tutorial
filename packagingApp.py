@@ -22,10 +22,15 @@ class MainWindow(QMainWindow):
         label.setMargin(10)
         layout.addWidget(label)
 
-        button = QPushButton("Push")
-        button.setIcon(QIcon(os.path.join(basedir, "icons", "lightning.png")))
-        button.pressed.connect(self.close)
-        layout.addWidget(button)
+        button1 = QPushButton("Hide")
+        button1.setIcon(QIcon(os.path.join(basedir, "icons", "hand.ico")))
+        button1.pressed.connect(self.lower)
+        layout.addWidget(button1)
+
+        button2 = QPushButton("Push")
+        button2.setIcon(QIcon(os.path.join(basedir, "icons", "lightning.png")))
+        button2.pressed.connect(self.close)
+        layout.addWidget(button2)
 
         container = QWidget()
         container.setLayout(layout)
